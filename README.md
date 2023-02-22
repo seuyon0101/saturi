@@ -18,5 +18,15 @@
 - ### We used kor-dialect corpus data downloaded from AIHUB(aihub.or.kr). 
 - ### This is still work in progress.
 </br>
+
+# Current Progress :
+
+- basic transformer model inference :
+
+![example1](img/t1.png)
+![example2](img/t2.png)
+![example3](img/t3.png)
+![example4](img/t4.png)
+
 (more updates to come)
 
