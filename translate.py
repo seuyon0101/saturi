@@ -8,16 +8,15 @@ import re
 import os
 
 import sys
-sys.path.insert(0,os.getenv('HOME') + '/aiffel/saturi/MODEL/') # vanilla transformer 파일경로에서 불러오기 위해 설정
-sys.path.insert(0,os.getenv('HOME') + '/aiffel/saturi/PRE/')
-sys.path.insert(0,os.getenv('HOME') + '/aiffel/saturi/POST/')
+sys.path.insert(0, './src/MODEL/')
+sys.path.insert(0, './src/PRE/')
+sys.path.insert(0, './src/POST/')
 
 from evaluation import evaluate
 
 import sentencepiece as spm
-from vanilla_transformer import Transformer, generate_masks
-data_path = os.getcwd() + '/notebook/Preprocessing/'
-weight_dir = os.getenv("HOME") + '/aiffel/aiffelthon/final_organizing_folder/transformer_cmsp_16009'
+from vanilla_transformer import Transformer
+
 class trans_former_config :
     def __init__(self) :
         self.n_layers =6
@@ -33,9 +32,9 @@ class trans_former_config :
 class tokenizer_config :
     def __init__(self, token_type = 'cmsp', vocab_small = False) :
         self.token_type = token_type
-        self.token_vocab_size = 8009 if vocab_small else 16000
-        self.enc_token_load_model = data_path + f'spm_enc_spm{self.token_vocab_size}.model'
-        self.dec_token_load_model = data_path + f'spm_dec_{self.token_type}{self.token_vocab_size}.model'
+        self.token_vocab_size = 8000 if vocab_small else 16000
+        self.enc_token_load_model = f'./ckpts/tokenizer/spm_enc_spm{self.token_vocab_size}.model'
+        self.dec_token_load_model = data_path + f'./ckpts/tokenizer/spm_dec_{self.token_type}{self.token_vocab_size}.model'
         self.enc_tokenizer = spm.SentencePieceProcessor()
         self.enc_tokenizer.Load(self.enc_token_load_model)
         self.dec_tokenizer = spm.SentencePieceProcessor()
@@ -61,7 +60,7 @@ class translator(trans_former_config) :
                                  self.pos_len,
                                  self.dropout,
                                  self.shared)
-        self.weight_dir = os.getenv("HOME") + f'/aiffel/aiffelthon/final_organizing_folder/transformer_{self.token_type}_{self.src_vocab_size}'
+        self.weight_dir = f'./ckpts/final_checkpoints/transformer_{self.token_type}_{self.src_vocab_size}'
         self.model.load_weights(self.weight_dir)
         
     def translate(self, input_txt) :
