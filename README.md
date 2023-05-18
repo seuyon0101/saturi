@@ -10,7 +10,7 @@
 |1. SY| (lead)|
 |2. SH| (model)
 |3. SA| (data)|
-|4. JI| (model|
+|4. JI| (model)|
 |5. DS| (coordinator)|
 |6. HW| (coordinator)|
 

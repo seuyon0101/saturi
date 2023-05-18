@@ -1,10 +1,9 @@
 import os
 import sys
 
-
-sys.path.insert(0,os.getenv('HOME') + '/aiffel/saturi/MODEL/') # vanilla transformer 파일경로에서 불러오기 위해 설정
-sys.path.insert(0,os.getenv('HOME') + '/aiffel/saturi/PRE/')
-sys.path.insert(0,os.getenv('HOME') + '/aiffel/saturi/POST/')
+sys.path.insert(0, './src/MODEL/')
+sys.path.insert(0, './src/PRE/')
+sys.path.insert(0, './src/POST/')
 
 from translate import translator
 
